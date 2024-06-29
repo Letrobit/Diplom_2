@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml
@@ -36,3 +37,9 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/.idea/
+/.allure/
+/.allure/
+/.allure/allure-2.15.0/
+/.allure/allure-2.15.0/lib/
+/.allure/allure-2.15.0/plugins/
