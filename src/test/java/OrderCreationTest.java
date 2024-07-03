@@ -3,7 +3,6 @@ import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import ru.practikum.register.GenerateUser;
@@ -28,7 +27,7 @@ public class OrderCreationTest {
 
     }
 
-    String accessToken;
+    private String accessToken;
     private GenerateUser generateUser;
 
     @Before
@@ -79,17 +78,16 @@ public class OrderCreationTest {
                 .extract().body().path("accessToken");
 
         List<String> expectedIngredients = getIngredientsToOrder();
+        String firstExpectedIngredient =  expectedIngredients.get(0);
+        String secondExpectedIngredient =  expectedIngredients.get(1);
+
         orderSteps
-                .createOrderWithAuthorization(expectedIngredients, accessToken);
-        List<String> actualIngredients = orderSteps
-                .getOrderAuthorizedUser(accessToken)
+                .createOrderWithAuthorization(expectedIngredients, accessToken)
                 .statusCode(200)
-                .extract().body().path("orders.ingredients");
+                .body("success", is(true))
+                .body("order.ingredients._id[0]", is(firstExpectedIngredient))
+                .body("order.ingredients._id[1]", is(secondExpectedIngredient));
 
-        String actualComparableIngredients = actualIngredients.toString().replace("[", "").replace("]", ""); //jank
-        String expectedComparableIngredients = expectedIngredients.toString().replace("[", "").replace("]", "");
-
-        Assert.assertEquals(expectedComparableIngredients, actualComparableIngredients);
     }
 
 
@@ -115,8 +113,8 @@ public class OrderCreationTest {
                 .extract().body().path("accessToken");
         orderSteps
                 .createOrderWithoutAuthorization(List.of("I'll have two number 9's, a number 9 large, " +
-                                                                "a number 6 with extra dip, a number 7, two number 45's," +
-                                                                 " one with cheese, and a large soda."))
+                        "a number 6 with extra dip, a number 7, two number 45's," +
+                        " one with cheese, and a large soda."))
                 .statusCode(500);
     }
 

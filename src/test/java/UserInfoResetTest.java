@@ -15,7 +15,7 @@ import static ru.practikum.constants.ConstantURI.STELLAR_BURGERS_URI;
 
 public class UserInfoResetTest {
     private final UserSteps userSteps = new UserSteps();
-    String accessToken;
+    private String accessToken;
     private GenerateUser generateUser;
 
     @Before

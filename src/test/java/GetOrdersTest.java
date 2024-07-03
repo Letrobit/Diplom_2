@@ -26,7 +26,7 @@ public class GetOrdersTest {
 
     }
 
-    String accessToken;
+    private String accessToken;
     private GenerateUser generateUser;
 
     @Before

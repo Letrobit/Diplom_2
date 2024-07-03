@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.*;
 
 public class UserRegisterTest {
     private final UserSteps userSteps = new UserSteps();
-    String accessToken;
+    private String accessToken;
     private GenerateUser generateUser;
 
     @Before

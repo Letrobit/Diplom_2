@@ -14,9 +14,6 @@ import static ru.practikum.constants.ConstantURI.STELLAR_BURGERS_URI;
 @RunWith(Parameterized.class)
 public class UserParameterizedRegisterTest {
     private final UserSteps userSteps = new UserSteps();
-    private String name;
-    private String password;
-    private String email;
     private static GenerateUser generateUser;
 
     public UserParameterizedRegisterTest(String name, String password, String email) {
